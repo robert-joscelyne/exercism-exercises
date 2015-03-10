@@ -18,3 +18,59 @@
 (count "Test")(use 'clojure.string)
 (trim "  f")
 (trim "  v  ")
+(defn- silence? [sentence]
+    (re-matches #"^\s*$"))
+(slience? "test")
+(silence? "test")
+(defn- silence? [sentence]
+    (re-matches #"^\s*$" sentence))
+(silence? "test")
+(silence? "")
+quit
+(defn- yelling? [sentence]
+    (re-matches #"\b[A-Z]{2,}\b" sentence))
+(yelling? "test")
+(yelling? "TEST")
+(yelling? "GO!")
+(defn- yelling? [sentence]
+    (re-matches #"\b[A-Z]{2,}" sentence))
+(yelling? "GO!")
+(yelling? "GO")
+(yelling? "GO !")
+(defn- yelling? [sentence]
+    (re-matches #"\b[A-Z]{2,}\b" sentence))
+(yelling? "GO !")
+(yelling? " GO !")
+(yelling? " GO ")
+(yelling? "GO")
+(defn- yelling? [sentence]
+    (re-matches #"[A-Z]{2,}" sentence))
+(yelling? "GO")
+(yelling? " GO ")
+quit
+ (re-matches #"\b[A-Z]{2,}\b" "WHAT THE HELL WERE YOU THINKING?")
+(re-find #"\b[A-Z]{2,}\b" "WHAT THE HELL WERE YOU THINKING?")
+quit
+  (re-find #"^[A-Z-0-9[:punct:][:space:]]+$" "WHAT THE HELL WERE YOU THINKING?")
+  (re-find #"^[A-Z-0-9[:punct:][:space:]]+$" "WHA")
+  (re-find #"^[A-Z-0-9[:punct:][:space:]]+$" "WHA T")
+  (re-find #"^[A-Z-0-9[:punct:][:space:]]+$" "WHAT")
+  (re-find #"^[A-Z-0-9 [:punct:][:space:]]+$" "WHAT")
+  (re-find #"^[A-Z-0-9 [:punct:][:space:]]+$" "WHA T")
+  (re-find #"^[A-Z-0-9 [:punct:][:space:]]+$" "WHA T?")
+quit
+(compare (string/upper-case "TEST") "TEST")
+(:require [clojure.string :as string])
+:require [clojure.string :as string]
+(ns bob
+(:require [clojure.string :as string]))
+(compare (string/upper-case "TEST") "TEST")
+(compare (string/upper-case "TEST") "TESt")
+(compare (string/upper-case "TEST") "TES")
+(count (filter #(Character/isLowerCase %) "test")
+(count (filter #(Character/isLowerCase %) "test"))
+)
+(count (filter #(Character/isLowerCase %) "test"))
+(count (filter #(Character/isLowerCase %) "TEST"))
+(count (filter #(Character/isLowerCase %) "ZOMG THE %^*@#$(*^ ZOMBIES ARE COMING!!11!!1!"))
+quit

@@ -1,0 +1,2 @@
+exec rna_transcription.clj
+quit

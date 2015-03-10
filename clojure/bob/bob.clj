@@ -1,12 +1,27 @@
 (ns bob
-  (:require [clojure.string :as str]))
+	(:require [clojure.string :as string]))
 
-(defn response-for [] "Fine. Be that way!")
+(defn countUppercase [sentence]
+	(count (filter #(Character/isUpperCase %) sentence)))
 
-(defn response-for 
-	([] "Fine. Be that way!")
-	([sentence] 
-		(if (= (count (str/trim sentence)) 0) "Fine. Be that way!" 
-			(if (and (= (count (filter #(Character/isLowerCase %) sentence)) 0) (> (count (filter #(Character/isUpperCase %) sentence)) 0)) "Whoa, chill out!"
-				(if (= (last sentence) \?) "Sure." "Whatever.")))))
+(defn countLowercase [sentence]
+	(count (filter #(Character/isLowerCase %) sentence)))
 
+; Check for silence - empty sentance
+(defn- silence? [sentence]
+    (re-matches #"^\s*$" sentence))
+
+; Check for Yelling - No character letters and at least one uppercase character
+(defn- yelling? [sentence]
+    (and (zero? (countLowercase sentence)) (pos? (countUppercase sentence))))
+
+; Check for Questions - sentenance ends in a ?
+(defn- question? [sentence]
+    (re-matches #".*\?" sentence))
+
+(defn response-for [sentence]
+    (cond
+        (silence? sentence) "Fine. Be that way!"
+        (yelling? sentence) "Whoa, chill out!"
+        (question? sentence) "Sure."
+        :else "Whatever."))
